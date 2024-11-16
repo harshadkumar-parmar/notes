@@ -96,3 +96,78 @@ List<String> filteredNames = names.stream()
 Java Stream API enhances code readability and efficiency by leveraging functional programming paradigms. Understanding and utilizing functions, serial and parallel flows, and predicates enable robust data processing workflows.
 
 ---
+
+## Terminal Operations
+
+In Java's Stream API, terminal operations are operations that produce a result or a side-effect and mark the end of the stream pipeline. Once a terminal operation is invoked, the stream is considered consumed and cannot be used further. Here are some common terminal operations:
+
+### Common Terminal Operations:
+1. **forEach**: Performs an action for each element of the stream.
+    ```java
+    List<String> list = Arrays.asList("a", "b", "c");
+    list.stream().forEach(System.out::println);
+    ```
+
+2. **collect**: Converts the elements of the stream into a different form, such as a list, set, or map.
+    ```java
+    List<String> list = Arrays.asList("a", "b", "c");
+    List<String> result = list.stream().collect(Collectors.toList());
+    ```
+
+3. **reduce**: Combines the elements of the stream into a single result using an associative accumulation function.
+    ```java
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
+    int sum = list.stream().reduce(0, Integer::sum);
+    ```
+
+4. **count**: Returns the number of elements in the stream.
+    ```java
+    List<String> list = Arrays.asList("a", "b", "c");
+    long count = list.stream().count();
+    ```
+
+5. **findFirst**: Returns the first element of the stream, if present.
+    ```java
+    List<String> list = Arrays.asList("a", "b", "c");
+    Optional<String> first = list.stream().findFirst();
+    ```
+
+6. **findAny**: Returns any element of the stream, if present.
+    ```java
+    List<String> list = Arrays.asList("a", "b", "c");
+    Optional<String> any = list.stream().findAny();
+    ```
+
+7. **allMatch**: Returns `true` if all elements of the stream match the given predicate.
+    ```java
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
+    boolean allEven = list.stream().allMatch(n -> n % 2 == 0);
+    ```
+
+8. **anyMatch**: Returns `true` if any element of the stream matches the given predicate.
+    ```java
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
+    boolean anyEven = list.stream().anyMatch(n -> n % 2 == 0);
+    ```
+
+9. **noneMatch**: Returns `true` if no elements of the stream match the given predicate.
+    ```java
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
+    boolean noneEven = list.stream().noneMatch(n -> n % 2 == 0);
+    ```
+
+10. **min**: Returns the minimum element of the stream according to the provided comparator.
+    ```java
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
+    Optional<Integer> min = list.stream().min(Integer::compareTo);
+    ```
+
+11. **max**: Returns the maximum element of the stream according to the provided comparator.
+    ```java
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
+    Optional<Integer> max = list.stream().max(Integer::compareTo);
+    ```
+
+### Characteristics:
+- **Consumes the Stream**: After a terminal operation is performed, the stream is closed and cannot be reused.
+- **Produces a Result**: Terminal operations produce a result, such as a collection, a single value, or a side-effect.
