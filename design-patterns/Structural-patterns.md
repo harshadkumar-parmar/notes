@@ -189,3 +189,128 @@ In this example:
 - `RefinedAbstraction` extends `Abstraction` and implements the `operation` method by calling the `operationImpl` method of the `Implementor`.
 
 The client code creates different combinations of abstractions and implementors, demonstrating how they can vary independently.
+
+## Composite Pattern
+
+The Composite Pattern is a structural design pattern that allows you to compose objects into tree structures to represent part-whole hierarchies. This pattern lets clients treat individual objects and compositions of objects uniformly. It is particularly useful when dealing with tree-like structures such as file systems, organizational hierarchies, or UI components.
+
+Here's the Mermaid diagram for the Composite pattern:
+
+```mermaid
+classDiagram
+    class Component {
+        <<Interface>>
+        + operation(): void
+        + add(Component component): void
+        + remove(Component component): void
+        + getChild(int index): Component
+    }
+
+    class Leaf {
+        + operation(): void
+    }
+
+    class Composite {
+        + operation(): void
+        + add(Component component): void
+        + remove(Component component): void
+        + getChild(int index): Component
+    }
+
+    Component <|-- Leaf
+    Component <|-- Composite
+    Composite o-- Component
+```
+
+### Explanation
+
+- **Component Interface:** Declares common operations for both `Leaf` and `Composite` objects, such as `operation`, `add`, `remove`, and `getChild`.
+- **Leaf Class:** Represents individual objects in the composition. Implements the `Component` interface but does not support adding or removing components.
+- **Composite Class:** Represents a composite component that can have children. Implements the `Component` interface and defines behavior for adding, removing, and accessing child components.
+
+### Benefits of the Composite Pattern:
+1. **Uniformity:** Treats individual objects and compositions of objects uniformly.
+2. **Flexibility:** Makes it easy to add new kinds of components without changing existing code.
+3. **Simplified Client Code:** Clients can interact with complex tree structures through a simple interface.
+
+### Implementation Example in Java
+
+Here's a simple implementation example of the Composite pattern in Java:
+
+```java
+// Component interface
+interface Component {
+    void operation();
+    default void add(Component component) {
+        throw new UnsupportedOperationException();
+    }
+    default void remove(Component component) {
+        throw new UnsupportedOperationException();
+    }
+    default Component getChild(int index) {
+        throw new UnsupportedOperationException();
+    }
+}
+
+// Leaf class
+class Leaf implements Component {
+    private String name;
+
+    public Leaf(String name) {
+        this.name = name;
+    }
+
+    public void operation() {
+        System.out.println("Leaf " + name + " operation");
+    }
+}
+
+// Composite class
+class Composite implements Component {
+    private List<Component> children = new ArrayList<>();
+
+    public void operation() {
+        for (Component child : children) {
+            child.operation();
+        }
+    }
+
+    public void add(Component component) {
+        children.add(component);
+    }
+
+    public void remove(Component component) {
+        children.remove(component);
+    }
+
+    public Component getChild(int index) {
+        return children.get(index);
+    }
+}
+
+// Client code
+public class Main {
+    public static void main(String[] args) {
+        Component leaf1 = new Leaf("1");
+        Component leaf2 = new Leaf("2");
+        
+        Composite composite = new Composite();
+        composite.add(leaf1);
+        composite.add(leaf2);
+
+        Component leaf3 = new Leaf("3");
+        Composite composite2 = new Composite();
+        composite2.add(composite);
+        composite2.add(leaf3);
+
+        composite2.operation();
+    }
+}
+```
+
+In this example:
+- The `Component` interface defines common operations for both leaf and composite objects.
+- The `Leaf` class represents individual objects and implements the `Component` interface.
+- The `Composite` class can have children and implements the `Component` interface to provide behavior for adding, removing, and accessing child components.
+
+The client code demonstrates creating a composite structure and performing operations on it, treating both individual `Leaf` objects and `Composite` objects uniformly.
