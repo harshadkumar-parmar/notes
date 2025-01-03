@@ -1,3 +1,43 @@
+# Concurrency
+
+The `java.util.concurrent` package in Java provides a powerful framework to handle multi-threading and concurrency, which are crucial for optimizing performance in multi-core systems. Let’s break down some of the key classes in this package:
+
+1. **Executor and ExecutorService**:
+   - **Executor** is a simple interface that supports launching new tasks.
+   - **ExecutorService** extends Executor with lifecycle management, which includes shutting down the executor and methods for tracking task progress.
+
+2. **ThreadPoolExecutor**:
+   - This class provides a way to manage a pool of worker threads to execute tasks concurrently. It can be fine-tuned with various parameters like core pool size, maximum pool size, and keep-alive time.
+
+3. **ScheduledExecutorService**:
+   - This interface extends ExecutorService to support tasks that are scheduled to run after a delay or periodically.
+
+4. **Future and FutureTask**:
+   - **Future** represents the result of an asynchronous computation. It provides methods to check if the computation is complete, to wait for its completion, and to retrieve the result.
+   - **FutureTask** is a concrete implementation of Future and Runnable, allowing you to start and manage a task.
+
+5. **CountDownLatch**:
+   - A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes.
+
+6. **CyclicBarrier**:
+   - A synchronization aid that allows a set of threads to all wait for each other to reach a common barrier point.
+
+7. **Semaphore**:
+   - A counting semaphore. Semaphores are typically used to limit the number of threads that can access some resource.
+
+8. **BlockingQueue**:
+   - Represents a queue that supports operations that wait for the queue to become non-empty when retrieving an element, and wait for space to become available in the queue when storing an element.
+
+9. **ConcurrentHashMap**:
+   - A thread-safe variant of HashMap that allows concurrent read and write access.
+
+10. **Locks and Condition Interfaces**:
+    - **ReentrantLock** is a reentrant mutual exclusion lock with the same basic behavior and semantics as the implicit monitor lock accessed using synchronized methods.
+    - **Condition** provides a means for one thread to suspend execution until notified by another thread that some state condition may now be true.
+
+These classes provide various mechanisms to manage concurrency and ensure thread safety, making it easier to implement robust multi-threaded applications.
+
+
 ## Executors
 
 ### Overview
